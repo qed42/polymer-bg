@@ -1,0 +1,91 @@
+<link rel="import" href="../polymer/polymer.html">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.balanced-gallery.js"></script>
+
+<!--
+`polymer-bg`
+A polymer element to evenly distribute the photos across rows or columns, making the most of the space provided.
+
+@demo demo/index.html
+-->
+
+<dom-module id="polymer-bg">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div id="myGallery">
+      <content></content>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'polymer-bg',
+
+      properties: {
+        autoResize: {
+          type: Boolean,
+          value: true
+        },
+        bgBackground: {
+          type: String,
+          value: ""
+        },
+        idealHeight: {
+          type: Number,
+          value: 300
+        },
+        idealWidth: {
+          type: Number,
+          value: 500
+        },
+        maintainOrder: {
+          type: Boolean,
+          value: true
+        },
+        bgOrientation: {
+          type: String,
+          value: 'horizontal'
+        },
+        bgPadding: {
+          type: Number,
+          value: 5
+        },
+        shuffleUnorderedPartitions: {
+          type: Boolean,
+          value: true
+        },
+        viewportHeight: {
+          type: Number
+        },
+        viewportWidth: {
+          type: Number
+        }
+      },
+      attached: function(){
+        this.async(function() {
+          // $(window).load(function() {
+            console.log(this.idealWidth);
+            $(this.$.myGallery).BalancedGallery({
+              autoResize: this.autoResize,
+              background: this.bgBackground,
+              idealHeight: this.idealHeight,
+              idealWidth: this.idealWidth,
+              maintainOrder: this.maintainOrder,
+              orientation: this.bgOrientation,
+              padding: this.bgPadding,
+              shuffleUnorderedPartitions: this.shuffleUnorderedPartitions,
+              viewportHeight: this.viewportHeight,
+              viewportWidth: this.viewportWidth
+            });
+          // });
+        });
+      }
+    });
+  </script>
+</dom-module>
